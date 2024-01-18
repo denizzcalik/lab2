@@ -1,5 +1,5 @@
 import java.awt.*;
-public abstract class Car implements Movable{
+public abstract class Car implements MovableInterface{
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     private double currentSpeed; // The current speed of the car
@@ -51,7 +51,7 @@ public abstract class Car implements Movable{
         this.currentSpeed = 0;
     }
 
-    abstract double speedFactor();
+    protected abstract double speedFactor();
 
     public void incrementSpeed(double amount) {
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, enginePower);
@@ -116,5 +116,6 @@ public abstract class Car implements Movable{
     public void turnRight(){
         this.direction += Math.PI/2;
     }
+
 
 }

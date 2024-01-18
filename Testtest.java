@@ -124,4 +124,12 @@ public class Testtest {
         testSaab.stopEngine();
         assertEquals(0, testSaab.getCurrentSpeed());
     }
+    @Test
+    public void TestScaniaPlatform() {
+        Scania testScania = new Scania(Color.blue, 4, 5);
+        testScania.raisePlatform(70);
+        testScania.gas(1);
+        testScania.move();
+        assertEquals(10.5, testScania.getY());
+    }
 }
