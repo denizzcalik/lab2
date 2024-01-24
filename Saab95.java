@@ -2,11 +2,11 @@ import java.awt.*;
 
 public class Saab95 extends Car {
 
-    public TurboCar turbocar;
+    public TurboBehaviour turbocar;
 
     public Saab95(Color color, int x, int y){
         super(2, 125, color, "Saab95", x, y);
-        this.turbocar = new TurboCar();
+        this.turbocar = new TurboBehaviour();
     }
 
     public double speedFactor(){

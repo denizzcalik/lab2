@@ -1,4 +1,4 @@
-public class Flatbed implements AttachmentInterface{
+public class Flatbed implements Attachment {
     private Boolean flatbedLevel;
 
     public Flatbed() {
@@ -7,10 +7,7 @@ public class Flatbed implements AttachmentInterface{
 
     @Override
     public Boolean attachmentInUse(){
-        if (this.flatbedLevel){
-            return Boolean.TRUE;
-        }
-        return Boolean.FALSE;
+        return this.flatbedLevel;
     }
     @Override
     public void raiseAttachment() {

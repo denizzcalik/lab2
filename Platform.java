@@ -1,4 +1,4 @@
-public class Platform implements AttachmentInterface {
+public class Platform implements Attachment {
     private int platformAngle;
 
     public Platform(){

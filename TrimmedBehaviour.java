@@ -1,7 +1,7 @@
-public class TrimCar {
+public class TrimmedBehaviour {
     public final double trimFactor;
 
-    public TrimCar(double trim) {
+    public TrimmedBehaviour(double trim) {
         this.trimFactor = trim;
     }
 

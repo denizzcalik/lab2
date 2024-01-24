@@ -1,4 +1,4 @@
-public interface MovableInterface {
+public interface Movable {
     void move();
     void turnLeft();
     void turnRight();

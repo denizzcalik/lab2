@@ -2,8 +2,8 @@ import java.awt.*;
 
 public abstract class Truck extends Car{
 
-    public AttachmentInterface attachment;
-    public Truck(int doors, int horsepower, Color carcolor, String model, double x, double y, AttachmentInterface attachment) {
+    public Attachment attachment;
+    public Truck(int doors, int horsepower, Color carcolor, String model, double x, double y, Attachment attachment) {
         super(doors, horsepower, carcolor, model, x, y);
         this.attachment = attachment;
 

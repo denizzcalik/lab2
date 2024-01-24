@@ -1,4 +1,4 @@
-public interface AttachmentInterface {
+public interface Attachment {
     Boolean attachmentInUse();
 
     void raiseAttachment();
