@@ -10,7 +10,7 @@ public abstract class Truck extends Car{
     }
     @Override
     protected double speedFactor() {
-        if (attachment.attachmentInUse() == Boolean.FALSE) {
+        if (this.attachment.attachmentInUse() == Boolean.FALSE) {
             return getEnginePower() * 0.01;
   }
         return 0;

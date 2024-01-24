@@ -12,11 +12,12 @@ public class Flatbed implements AttachmentInterface{
         }
         return Boolean.FALSE;
     }
-
-    public void activateFlatbed() {
+    @Override
+    public void raiseAttachment() {
         this.flatbedLevel = Boolean.TRUE;
     }
-    public void inactivateFlatbed(){
+    @Override
+    public void lowerAttachment(){
         this.flatbedLevel = Boolean.FALSE;
     }
 }

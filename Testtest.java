@@ -127,8 +127,11 @@ public class Testtest {
     @Test
     public void TestScaniaPlatform() {
         Scania testScania = new Scania(Color.blue, 4, 5);
-        testScania.raisePlatform(70);
+        testScania.raisePlatform(0);
         testScania.gas(1);
+        testScania.move();
+        testScania.stopEngine();
+        testScania.raisePlatform(20);
         testScania.move();
         assertEquals(10.5, testScania.getY());
     }
