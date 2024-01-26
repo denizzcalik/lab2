@@ -6,18 +6,15 @@ public class Scania extends Truck{
         super(2, 550, color, "Scania", x, y, new Platform());
 
     }
-    public void raisePlatform(int amount){
+    public void raisePlatform(){
         if (getCurrentSpeed() == 0) {
-            if (this.attachment instanceof Platform) {
-                ((Platform) this.attachment).raiseAttachment(amount);
+            this.attachment.raiseAttachment();
+        }
+    }
+    public void lowerPlatform(){
+        if (getCurrentSpeed() == 0) {
+            this.attachment.lowerAttachment();
             }
         }
     }
-    public void lowerPlatform(int amount){
-        if (getCurrentSpeed() == 0) {
-            if (this.attachment instanceof Platform) {
-                ((Platform) this.attachment).lowerAttachment(amount);
-            }
-        }
-    }
-}
+
