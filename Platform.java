@@ -10,15 +10,14 @@ public class Platform implements Attachment {
     }
 
     @Override
-    public void raiseAttachment(){}
+    public void raiseAttachment(){
+        this.platformAngle = Math.min(getAngle() + 10, 70);
+    }
     @Override
-    public void lowerAttachment(){}
-    public void raiseAttachment(int amount){
-        this.platformAngle = Math.min(getAngle() + amount, 70);
+    public void lowerAttachment(){
+        this.platformAngle = Math.max(getAngle() - 10, 0);
     }
-    public void lowerAttachment(int amount){
-        this.platformAngle = Math.max(getAngle() - amount, 0);
-    }
+    
     @Override
     public Boolean attachmentInUse(){
         return this.platformAngle > 0;
@@ -26,3 +25,4 @@ public class Platform implements Attachment {
 
 
 }
+
