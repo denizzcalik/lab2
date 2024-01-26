@@ -18,6 +18,7 @@ public class CarTransporter extends Truck implements CarLoading {
             this.attachment.raiseAttachment();
         }
     }
+
     public void lowerFlatbed() {
         if (getCurrentSpeed() == 0) {
             this.attachment.lowerAttachment();
@@ -33,31 +34,20 @@ public class CarTransporter extends Truck implements CarLoading {
         }
     }
 
-    @Override
-    public Car unload() {
-        if (!loadedCars.isEmpty() && !attachment.attachmentInUse() && this.getCurrentSpeed() == 0) {
-            Car car = loadedCars.removeLast();
-            car.setX(this.getX() + 2); // Tog nåt godtyckligt
-            car.setY(this.getY() + 2);
-            return car;
+    public void unload() {
+        if (!attachment.attachmentInUse() && this.getCurrentSpeed() == 0) {
+            loadable.unload();
         }
-        return null;
     }
 
     @Override
-    public List<Car> getLoadedCars() {
-        return new ArrayList<>(loadedCars);
-    }
-    public int nrOfLoadedCars(){
-        return getLoadedCars().size();
-    }
-
-    private boolean canLoad(Car car) {
-        if (loadedCars.size() >= maxLoad || attachment.attachmentInUse() || this.getCurrentSpeed() != 0) {
-            return false;
+    public void move(){
+        super.move();
+        this.loadable.move(this.getX(), this.getY());
+        for (int i = 0; i < loadable.nrOfLoadedCars(); i++){
+            Car car = loadable.getLoadedCars().get(i);
+            car.setX(loadable.getX());
+            car.setY(loadable.getY());
         }
-
-        double distance = Math.sqrt(Math.pow(this.getX() - car.getX(), 2) + Math.pow(this.getY() - car.getY(), 2));
-        return distance <= loadingRadius && !(car instanceof CarTransporter);
     }
 }
