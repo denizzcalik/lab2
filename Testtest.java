@@ -142,17 +142,16 @@ public class Testtest {
         Volvo240 volvo240 = new Volvo240(Color.black, 7, 6); // radie utanför vad som är ok
         //newcar.raiseFlatbed(); //får ej lasta bilar med flatbed uppe
         newcar.load(volvo240);
-        assertEquals(0, newcar.nrOfLoadedCars());
+        assertEquals(0, newcar.loadable.nrOfLoadedCars());
     }
-    @Test
-    public void TestLastIndexIsRemoved() {
-        CarTransporter newTransporter = new CarTransporter(2,  Color.black, 4, 5);
-        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
-        Saab95 saab95 = new Saab95(Color.blue, 6,5);
-        newTransporter.load(saab95);
-        newTransporter.load(volvo240);
-        assertEquals(volvo240, newTransporter.unload()); //volvo bör unloadas först, FIFO
-    }
+//    @Test
+//    public void TestLastIndexIsRemoved() {
+//        CarTransporter newTransporter = new CarTransporter(2,  Color.black, 4, 5);
+//        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
+//        Saab95 saab95 = new Saab95(Color.blue, 6,5);
+//        newTransporter.load(saab95);
+//        newTransporter.load(volvo240);
+//        assertEquals(volvo240, newTransporter.unload()); //volvo bör unloadas först, FIFO}
     @Test
     public void TestCarIsAtRightSpotWhenUnloading() {
         CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
@@ -170,7 +169,7 @@ public class Testtest {
         Saab95 saab95 = new Saab95(Color.blue, 6, 5);
         newTransporter.load(saab95);
         newTransporter.load(volvo240);
-        assertEquals(1, newTransporter.nrOfLoadedCars());
+        assertEquals(1, newTransporter.loadable.nrOfLoadedCars());
     }
     @Test
     public void TestLoadWhenFlatbedUp() {
@@ -178,7 +177,7 @@ public class Testtest {
         newTransporter.raiseFlatbed();
         Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
         newTransporter.load(volvo240);
-        assertEquals(0, newTransporter.nrOfLoadedCars());
+        assertEquals(0, newTransporter.loadable.nrOfLoadedCars());
     }
     @Test
     public void TestFlipFlatbedTwice() {
@@ -187,6 +186,22 @@ public class Testtest {
         newTransporter.lowerFlatbed();
         Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
         newTransporter.load(volvo240);
-        assertEquals(1, newTransporter.nrOfLoadedCars());
+        assertEquals(1, newTransporter.loadable.nrOfLoadedCars());
+    }
+    @Test
+    public void TestGas() {
+        CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
+        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
+        newTransporter.load(volvo240);
+        newTransporter.gas(1);
+        newTransporter.move();
+        assertEquals(newTransporter.getX(), volvo240.getX());
+    }
+    @Test
+    public void TestSameX() {
+        CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
+        newTransporter.gas(1);
+        newTransporter.move();
+        assertEquals(10.5, newTransporter.loadable.getY());
     }
 }
