@@ -127,12 +127,66 @@ public class Testtest {
     @Test
     public void TestScaniaPlatform() {
         Scania testScania = new Scania(Color.blue, 4, 5);
-        testScania.raisePlatform(0);
+        testScania.raisePlatform();
+        testScania.lowerPlatform();
         testScania.gas(1);
         testScania.move();
         testScania.stopEngine();
-        testScania.raisePlatform(20);
+        testScania.raisePlatform();
         testScania.move();
         assertEquals(10.5, testScania.getY());
+    }
+    @Test
+    public void TestCarPosition() {
+        CarTransporter newcar = new CarTransporter(2,  Color.black, 4, 5);
+        Volvo240 volvo240 = new Volvo240(Color.black, 7, 6); // radie utanför vad som är ok
+        //newcar.raiseFlatbed(); //får ej lasta bilar med flatbed uppe
+        newcar.load(volvo240);
+        assertEquals(0, newcar.nrOfLoadedCars());
+    }
+    @Test
+    public void TestLastIndexIsRemoved() {
+        CarTransporter newTransporter = new CarTransporter(2,  Color.black, 4, 5);
+        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
+        Saab95 saab95 = new Saab95(Color.blue, 6,5);
+        newTransporter.load(saab95);
+        newTransporter.load(volvo240);
+        assertEquals(volvo240, newTransporter.unload()); //volvo bör unloadas först, FIFO
+    }
+    @Test
+    public void TestCarIsAtRightSpotWhenUnloading() {
+        CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
+        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
+        Saab95 saab95 = new Saab95(Color.blue, 6, 5);
+        newTransporter.load(saab95);
+        newTransporter.load(volvo240);
+        newTransporter.unload();
+        assertEquals(6, volvo240.getX());
+    }
+    @Test
+    public void TestCarLoadMaximized() {
+        CarTransporter newTransporter = new CarTransporter(1, Color.black, 4, 5);
+        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
+        Saab95 saab95 = new Saab95(Color.blue, 6, 5);
+        newTransporter.load(saab95);
+        newTransporter.load(volvo240);
+        assertEquals(1, newTransporter.nrOfLoadedCars());
+    }
+    @Test
+    public void TestLoadWhenFlatbedUp() {
+        CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
+        newTransporter.raiseFlatbed();
+        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
+        newTransporter.load(volvo240);
+        assertEquals(0, newTransporter.nrOfLoadedCars());
+    }
+    @Test
+    public void TestFlipFlatbedTwice() {
+        CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
+        newTransporter.raiseFlatbed();
+        newTransporter.lowerFlatbed();
+        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
+        newTransporter.load(volvo240);
+        assertEquals(1, newTransporter.nrOfLoadedCars());
     }
 }
