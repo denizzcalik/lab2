@@ -15,8 +15,11 @@ public class CarShop{
     }
 
     public void load(Car car) {
-        if (car.getClass().equals(acceptedCarType)){
+        if (acceptedCarType.isInstance(car)) {
             loadable.load(car);
+        } else {
+            throw new IllegalArgumentException("Invalid car type");
+        }
     }
 
     public void unload() {

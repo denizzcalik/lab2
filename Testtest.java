@@ -204,4 +204,27 @@ public class Testtest {
         newTransporter.move();
         assertEquals(10.5, newTransporter.loadable.getY());
     }
+
+    @Test
+    public void TestVolvoCarShop() {
+        Volvo240 testVolvo = new Volvo240(Color.blue, 0, 0);
+        Saab95 testSaab = new Saab95(Color.blue, 0, 0);
+        CarShop testShop = new CarShop(2, 0, 0, Volvo240.class);
+        testShop.load(testVolvo);
+//        testShop.load(testSaab);
+        testShop.unload();
+        assertEquals(2, testVolvo.getY());
+    }
+
+    @Test
+    public void TestAllCarShop() {
+        Volvo240 testVolvo = new Volvo240(Color.blue, 0, 0);
+        Saab95 testSaab = new Saab95(Color.blue, 0, 0);
+        CarShop testShop = new CarShop(2, 0, 0);
+        testShop.load(testVolvo);
+        testShop.load(testSaab);
+        testShop.unload();
+        testShop.unload();
+        assertEquals(2, testVolvo.getY());
+    }
 }
