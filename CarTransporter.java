@@ -24,7 +24,8 @@ public class CarTransporter extends Truck{
     }
 
     public void load(Car car) {
-        if (!attachment.attachmentInUse() && this.getCurrentSpeed() == 0 && !(car instanceof Truck)){
+        if (!attachment.attachmentInUse() && this.getCurrentSpeed() == 0 &&
+                !(car instanceof CarTransporter) && (car.getSize() != CarSize.LARGE)){
             loadable.load(car);
         }
     }

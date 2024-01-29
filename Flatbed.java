@@ -17,4 +17,12 @@ public class Flatbed implements Attachment {
     public void lowerAttachment(){
         this.flatbedLevel = Boolean.FALSE;
     }
+    @Override
+    public int getState(){
+        if (this.flatbedLevel){
+            return 1;
+        }
+        return 0;
+    }
+
 }

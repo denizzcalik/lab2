@@ -8,8 +8,9 @@ public abstract class Car implements Movable {
     private double x;
     private double y;
     private double direction;
+    private CarSize size;
 
-    public Car(int doors, double horsepower, Color carcolor, String model, double x, double y) {
+    public Car(int doors, double horsepower, Color carcolor, String model, double x, double y, CarSize size) {
         this.nrDoors = doors;
         this.enginePower = horsepower;
         this.currentSpeed = 0;
@@ -18,7 +19,9 @@ public abstract class Car implements Movable {
         this.x = x;
         this.y = y;
         this.direction = 0;
+        this.size = size;
     }
+    public enum CarSize{SMALL, MEDIUM, LARGE}
     public int getNrDoors() {
         return this.nrDoors;
     }
@@ -41,6 +44,10 @@ public abstract class Car implements Movable {
 
     public void setColor(Color clr) {
         this.color = clr;
+    }
+
+    public CarSize getSize(){
+        return this.size;
     }
 
     public void startEngine() {
@@ -116,6 +123,7 @@ public abstract class Car implements Movable {
     public void turnRight(){
         this.direction += Math.PI/2;
     }
+
 
 
 }

@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Loadable implements CarLoading{
+public class Loadable implements Loading {
     private final int maxLoad;
     private final ArrayList<Car> loadedCars;
     private static final double loadingRadius = 3;

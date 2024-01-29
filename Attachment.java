@@ -4,4 +4,6 @@ public interface Attachment {
     void raiseAttachment();
 
     void lowerAttachment();
+
+    int getState();
 }

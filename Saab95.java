@@ -5,7 +5,7 @@ public class Saab95 extends Car {
     public TurboBehaviour turbocar;
 
     public Saab95(Color color, int x, int y){
-        super(2, 125, color, "Saab95", x, y);
+        super(2, 125, color, "Saab95", x, y, CarSize.SMALL);
         this.turbocar = new TurboBehaviour();
     }
 

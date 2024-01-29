@@ -5,17 +5,17 @@ public class Platform implements Attachment {
         this.platformAngle = 0;
     }
 
-    public int getAngle(){
+    @Override
+    public int getState(){
         return this.platformAngle;
     }
-
     @Override
     public void raiseAttachment(){
-        this.platformAngle = Math.min(getAngle() + 10, 70);
+        this.platformAngle = Math.min(getState() + 10, 70);
     }
     @Override
     public void lowerAttachment(){
-        this.platformAngle = Math.max(getAngle() - 10, 0);
+        this.platformAngle = Math.max(getState() - 10, 0);
     }
     
     @Override

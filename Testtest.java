@@ -144,14 +144,15 @@ public class Testtest {
         newcar.load(volvo240);
         assertEquals(0, newcar.loadable.nrOfLoadedCars());
     }
-//    @Test
-//    public void TestLastIndexIsRemoved() {
-//        CarTransporter newTransporter = new CarTransporter(2,  Color.black, 4, 5);
-//        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
-//        Saab95 saab95 = new Saab95(Color.blue, 6,5);
-//        newTransporter.load(saab95);
-//        newTransporter.load(volvo240);
-//        assertEquals(volvo240, newTransporter.unload()); //volvo bör unloadas först, FIFO}
+    @Test
+    public void TestLastIndexIsRemoved() {
+        CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
+        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
+        Saab95 saab95 = new Saab95(Color.blue, 6, 5);
+        newTransporter.load(saab95);
+        newTransporter.load(volvo240);
+        assertEquals(volvo240, newTransporter.unload()); //volvo bör unloadas först, FIFO
+    }
     @Test
     public void TestCarIsAtRightSpotWhenUnloading() {
         CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
@@ -229,5 +230,30 @@ public class Testtest {
         System.out.print(car);
         testShop.unload();
         assertEquals(2, testVolvo.getY());
+    }
+    @Test
+    public void TestAngleNotExceeding70() {
+        Scania testScania = new Scania(Color.blue, 4, 5);
+        for (int i = 0; i < 10; i++) {
+            testScania.raisePlatform();
+        }
+        assertEquals(70, testScania.attachment.getState());
+
+    }
+    @Test
+    public void TestAngleNotLessThan0() {
+        Scania testScania = new Scania(Color.blue, 4, 5);
+        for (int i = 0; i < 10; i++) {
+            testScania.lowerPlatform();
+        }
+        assertEquals(0, testScania.attachment.getState());
+
+    }
+    @Test
+    public void TestLoadTruck() {
+        CarTransporter testTruck = new CarTransporter(2, Color.black, 4, 5);
+        Scania testScania = new Scania(Color.blue, 4, 5);
+        testTruck.load(testScania);
+        assertEquals(0, testTruck.loadable.nrOfLoadedCars());
     }
 }
