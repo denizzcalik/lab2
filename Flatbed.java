@@ -1,28 +1,25 @@
 public class Flatbed implements Attachment {
-    private Boolean flatbedLevel;
+    private int state;
 
     public Flatbed() {
-        this.flatbedLevel = Boolean.FALSE;
+        this.state = 0;
     }
 
     @Override
     public Boolean attachmentInUse(){
-        return this.flatbedLevel;
+        return this.state > 0;
     }
     @Override
     public void raiseAttachment() {
-        this.flatbedLevel = Boolean.TRUE;
+        this.state = 1;
     }
     @Override
     public void lowerAttachment(){
-        this.flatbedLevel = Boolean.FALSE;
+        this.state = 0;
     }
     @Override
     public int getState(){
-        if (this.flatbedLevel){
-            return 1;
-        }
-        return 0;
+        return this.state;
     }
 
 }

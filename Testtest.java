@@ -256,4 +256,10 @@ public class Testtest {
         testTruck.load(testScania);
         assertEquals(0, testTruck.loadable.nrOfLoadedCars());
     }
+    @Test
+    public void TestFlatbedUp() {
+        CarTransporter testTruck = new CarTransporter(2, Color.black, 4, 5);
+        testTruck.raiseFlatbed();
+        assertEquals(1, testTruck.attachment.getState());
+    }
 }
