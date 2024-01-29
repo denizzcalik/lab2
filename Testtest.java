@@ -211,7 +211,7 @@ public class Testtest {
         Saab95 testSaab = new Saab95(Color.blue, 0, 0);
         CarShop testShop = new CarShop(2, 0, 0, Volvo240.class);
         testShop.load(testVolvo);
-//        testShop.load(testSaab);
+ //       testShop.load(testSaab);
         testShop.unload();
         assertEquals(2, testVolvo.getY());
     }
@@ -224,6 +224,9 @@ public class Testtest {
         testShop.load(testVolvo);
         testShop.load(testSaab);
         testShop.unload();
+        testShop.unload();
+        Car car = testShop.unload();
+        System.out.print(car);
         testShop.unload();
         assertEquals(2, testVolvo.getY());
     }

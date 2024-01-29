@@ -22,8 +22,8 @@ public class CarShop{
         }
     }
 
-    public void unload() {
-        loadable.unload();
+    public Car unload() {
+        return loadable.unload();
     }
 
 }

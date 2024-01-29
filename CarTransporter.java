@@ -24,15 +24,16 @@ public class CarTransporter extends Truck{
     }
 
     public void load(Car car) {
-        if (!attachment.attachmentInUse() && this.getCurrentSpeed() == 0) {
+        if (!attachment.attachmentInUse() && this.getCurrentSpeed() == 0 && !(car instanceof Truck)){
             loadable.load(car);
         }
     }
 
-    public void unload() {
+    public Car unload() {
         if (!attachment.attachmentInUse() && this.getCurrentSpeed() == 0) {
-            loadable.unload();
+            return loadable.unload();
         }
+        return null;
     }
 
     @Override

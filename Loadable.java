@@ -38,12 +38,14 @@ public class Loadable implements CarLoading{
     }
 
     @Override
-    public void unload() {
+    public Car unload() {
         if (!loadedCars.isEmpty()) {
             Car car = loadedCars.removeLast();
             car.setX(this.getX() + 2); // Tog nåt godtyckligt
             car.setY(this.getY() + 2);
+            return car;
         }
+       return null;
     }
 
     public List<Car> getLoadedCars() {
@@ -58,7 +60,7 @@ public class Loadable implements CarLoading{
     }
     private boolean canLoad(Car car) {
         return loadedCars.size() < maxLoad
-                && !(this.distanceBetween(car) >= loadingRadius) && !(car instanceof CarTransporter);
+                && !(this.distanceBetween(car) >= loadingRadius);
     }
 
 
