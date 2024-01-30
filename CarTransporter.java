@@ -2,14 +2,18 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CarTransporter extends Truck{
 
-    protected Loadable loadable;
+public class CarTransporter <T extends Car> extends Truck{
+
+
+    protected Loadable <T> loadable;
+
 
     public CarTransporter(int maxLoad, Color color, int x, int y) {
         super(2, 550, color, "Car Transporter", x, y, new Flatbed());
         this.loadable = new Loadable(maxLoad, x, y);
     }
+
 
     public void raiseFlatbed() {
         if (this.getCurrentSpeed() == 0) {
@@ -17,18 +21,20 @@ public class CarTransporter extends Truck{
         }
     }
 
+
     public void lowerFlatbed() {
         if (this.getCurrentSpeed() == 0) {
             this.attachment.lowerAttachment();
         }
     }
 
-    public void load(Car car) {
-        if (!attachment.attachmentInUse() && this.getCurrentSpeed() == 0 &&
-                !(car instanceof CarTransporter) && (car.getSize() != CarSize.LARGE)){
+
+    public void load(T car) {
+        if (!attachment.attachmentInUse() && this.getCurrentSpeed() == 0 && !(car instanceof Truck)){
             loadable.load(car);
         }
     }
+
 
     public Car unload() {
         if (!attachment.attachmentInUse() && this.getCurrentSpeed() == 0) {
@@ -36,6 +42,7 @@ public class CarTransporter extends Truck{
         }
         return null;
     }
+
 
     @Override
     public void move(){

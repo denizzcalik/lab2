@@ -1,4 +1,4 @@
-public interface Loading {
-    void load(Car car);
-    Car unload();
+public interface Loading <T>{
+    void load(T car);
+    T unload();
 }

@@ -2,42 +2,46 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 import java.awt.*;
-
-
-
 public class Testtest {
-    @Test
+    //Tester för Car:
+    @Test // Testar CarSize
+    public void TestCarSize() {
+        Volvo240 testVolvo = new Volvo240(Color.blue, 12, 5);
+        assertEquals(Car.CarSize.MEDIUM, testVolvo.getSize());
+    }
+
+    @Test // Testar bilens färg
     public void TestVolvoColor() {
         Volvo240 testVolvo = new Volvo240(Color.blue, 12, 5);
         assertEquals(Color.blue, testVolvo.getColor());
     }
-    @Test
+    @Test // Testar bilens dörrantal
     public void TestVolvoDoor() {
         Volvo240 testVolvo = new Volvo240(Color.blue, 12, 5);
         assertEquals(4, testVolvo.getNrDoors());
     }
-    @Test
+    @Test // Testar bilens modell
     public void TestVolvoModel() {
         Volvo240 testVolvo = new Volvo240(Color.blue, 12, 5);
         assertEquals("Volvo240", testVolvo.getModelName());
     }
-    @Test
-    public void TestVolvoXequals12() {
+    @Test // Testar bilens x-position
+    public void TestVolvoXEquals12() {
         Volvo240 testVolvo = new Volvo240(Color.blue, 12, 5);
         assertEquals(12, testVolvo.getX());
     }
-    @Test
+    @Test // Testar bilens y-position
     public void TestVolvoYequals5() {
         Volvo240 testVolvo = new Volvo240(Color.blue, 12, 5);
         assertEquals(5, testVolvo.getY());
     }
-    @Test
+    @Test // Testar ett färgbyte
     public void TestVolvoColorChange() {
         Volvo240 testVolvo = new Volvo240(Color.blue, 12, 5);
         testVolvo.setColor(Color.black);
         assertEquals(Color.black, testVolvo.getColor());
     }
-    @Test
+    @Test // Testar att svänga vänster och att flytta
     public void TestVolvoTurnLeft() {
         Volvo240 testVolvo = new Volvo240(Color.blue, 12, 5);
         testVolvo.incrementSpeed(1);
@@ -46,7 +50,8 @@ public class Testtest {
         assertEquals(10.75, testVolvo.getX());
     }
 
-    @Test
+
+    @Test // Testar att svänga höger och att flytta
     public void TestVolvoTurnRight() {
         Volvo240 testVolvo = new Volvo240(Color.blue, 12, 5);
         testVolvo.gas(1);
@@ -55,76 +60,96 @@ public class Testtest {
         assertEquals( 13.25, testVolvo.getX());
     }
 
-    @Test
+
+    @Test // Testar bromsen
+    public void TestVolvoBrake() {
+        Volvo240 testVolvo = new Volvo240(Color.blue, 12, 5);
+        testVolvo.gas(1);
+        testVolvo.brake(1);
+        testVolvo.move();
+        assertEquals( 5, testVolvo.getY());
+    }
+
+
+    @Test // Testar att svänga höger två gånger (vända) och att köra iväg
     public void TestVolvoTurnRightTwice() {
         Volvo240 testVolvo = new Volvo240(Color.blue, 12, 5);
         testVolvo.gas(1);
         testVolvo.gas(1);
-        testVolvo.gas(1);
-        testVolvo.brake(1);
         testVolvo.turnRight();
         testVolvo.turnRight();
         testVolvo.move();
         assertEquals( 2.5, testVolvo.getY());
     }
-    
-    @Test
+
+
+    @Test //Testar att sätta på Saab-Turbo
     public void TestSaabTurboOn() {
         Saab95 testSaab = new Saab95(Color.blue, 12, 5);
         testSaab.turbocar.setTurboOn();
         assertEquals(1.3, testSaab.turbocar.getTurbo());
     }
 
-    @Test
+
+    @Test // Testar att sätta av Saab-Turbo
     public void TestSaabTurboOff() {
         Saab95 testSaab = new Saab95(Color.blue, 12, 5);
         testSaab.turbocar.setTurboOff();
         assertEquals(1, testSaab.turbocar.getTurbo());
     }
 
-    @Test
+
+    @Test // Testar speedFactor med Turbo
     public void TestSaabSpeedfactor() {
         Saab95 testSaab = new Saab95(Color.blue, 12, 5);
         testSaab.turbocar.setTurboOn();
         assertEquals(1.625, testSaab.speedFactor());
     }
 
-    @Test
+
+    @Test // Testar att flytta en Saab (x)
     public void TestSaabSetX() {
         Saab95 testSaab = new Saab95(Color.blue, 12, 5);
         testSaab.setX(7);
         assertEquals(7, testSaab.getX());
     }
 
-    @Test
+
+    @Test // Testar att flytta en Saab (y)
     public void TestSaabSetY() {
         Saab95 testSaab = new Saab95(Color.blue, 12, 5);
         testSaab.setY(7);
         assertEquals(7, testSaab.getY());
     }
 
-    @Test
+
+    @Test // Testar att flytta en Saabs riktning
     public void TestSaabSetAngle() {
         Saab95 testSaab = new Saab95(Color.blue, 12, 5);
         testSaab.setDirection(Math.PI/2);
         assertEquals(Math.PI/2, testSaab.getDirection());
     }
 
-    @Test
+
+    @Test //Testar att sätta på motorn
     public void TestSaabStartEngine() {
         Saab95 testSaab = new Saab95(Color.blue, 12, 5);
         testSaab.startEngine();
         assertEquals(0.1, testSaab.getCurrentSpeed());
     }
 
-    @Test
+
+    @Test //Testar att stänga av motorn
     public void TestSaabStopEngine() {
         Saab95 testSaab = new Saab95(Color.blue, 12, 5);
         testSaab.startEngine();
         testSaab.stopEngine();
         assertEquals(0, testSaab.getCurrentSpeed());
     }
-    @Test
+
+
+    //Tester För Scania
+    @Test //Testar Scanias Plattform-logik, en flytt bör gå men inte andra
     public void TestScaniaPlatform() {
         Scania testScania = new Scania(Color.blue, 4, 5);
         testScania.raisePlatform();
@@ -136,92 +161,133 @@ public class Testtest {
         testScania.move();
         assertEquals(10.5, testScania.getY());
     }
-    @Test
-    public void TestCarPosition() {
-        CarTransporter newcar = new CarTransporter(2,  Color.black, 4, 5);
-        Volvo240 volvo240 = new Volvo240(Color.black, 7, 6); // radie utanför vad som är ok
-        //newcar.raiseFlatbed(); //får ej lasta bilar med flatbed uppe
-        newcar.load(volvo240);
-        assertEquals(0, newcar.loadable.nrOfLoadedCars());
+
+
+    // Tester för CarTransporter
+    @Test // Testar att lasta en bil utanför radien
+    public void TestCarDistance() {
+        CarTransporter<Car> newCar = new CarTransporter<>(2,  Color.black, 4, 5);
+        Volvo240 volvo240 = new Volvo240(Color.black, 7, 6);
+        newCar.load(volvo240);
+        assertEquals(0, newCar.loadable.nrOfLoadedCars());
     }
-    @Test
+    @Test //Testar att lasta av en bil - LIFO
     public void TestLastIndexIsRemoved() {
-        CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
-        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
+        CarTransporter<Car> newTransporter = new CarTransporter<>(2, Color.black, 4, 5);
+        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6);
         Saab95 saab95 = new Saab95(Color.blue, 6, 5);
         newTransporter.load(saab95);
         newTransporter.load(volvo240);
-        assertEquals(volvo240, newTransporter.unload()); //volvo bör unloadas först, FIFO
+        assertEquals(volvo240, newTransporter.unload());
     }
-    @Test
+    @Test //Testar att bilen lastas av på rätt position
     public void TestCarIsAtRightSpotWhenUnloading() {
-        CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
-        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
+        CarTransporter<Car> newTransporter = new CarTransporter<>(2, Color.black, 4, 5);
+        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6);
         Saab95 saab95 = new Saab95(Color.blue, 6, 5);
         newTransporter.load(saab95);
         newTransporter.load(volvo240);
         newTransporter.unload();
         assertEquals(6, volvo240.getX());
     }
-    @Test
+    @Test //Testar att det inte går att lasta mer än maxLoad
     public void TestCarLoadMaximized() {
-        CarTransporter newTransporter = new CarTransporter(1, Color.black, 4, 5);
+        CarTransporter<Car> newTransporter = new CarTransporter<>(1, Color.black, 4, 5);
         Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
         Saab95 saab95 = new Saab95(Color.blue, 6, 5);
         newTransporter.load(saab95);
         newTransporter.load(volvo240);
         assertEquals(1, newTransporter.loadable.nrOfLoadedCars());
     }
-    @Test
+    @Test //Testar att det inte går att lasta när flaket används
     public void TestLoadWhenFlatbedUp() {
-        CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
+        CarTransporter<Car> newTransporter = new CarTransporter<>(2, Color.black, 4, 5);
         newTransporter.raiseFlatbed();
-        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
+        Volvo240 volvo240 = new Volvo240(Color.black, 5, 6);
         newTransporter.load(volvo240);
         assertEquals(0, newTransporter.loadable.nrOfLoadedCars());
     }
-    @Test
+    @Test //Testar att höja och sänka flatbed
     public void TestFlipFlatbedTwice() {
-        CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
+        CarTransporter<Car> newTransporter = new CarTransporter<>(2, Color.black, 4, 5);
         newTransporter.raiseFlatbed();
         newTransporter.lowerFlatbed();
         Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
         newTransporter.load(volvo240);
         assertEquals(1, newTransporter.loadable.nrOfLoadedCars());
     }
-    @Test
-    public void TestGas() {
-        CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
+    @Test // Testar att flatbed har rätt states
+    public void TestFlatbedState() {
+        CarTransporter<Car> newTransporter = new CarTransporter<>(2, Color.black, 4, 5);
+        newTransporter.raiseFlatbed();
+        newTransporter.lowerFlatbed();
+        assertEquals(0, newTransporter.attachment.getState());
+    }
+    @Test //Testar att bilen flyttas med transportören
+    public void TestTransporterAndCarSameX() {
+        CarTransporter<Car> newTransporter = new CarTransporter<>(2, Color.black, 4, 5);
         Volvo240 volvo240 = new Volvo240(Color.black, 5, 6); // radie på sqrt(2) från truck, ok
         newTransporter.load(volvo240);
         newTransporter.gas(1);
         newTransporter.move();
         assertEquals(newTransporter.getX(), volvo240.getX());
     }
-    @Test
-    public void TestSameX() {
-        CarTransporter newTransporter = new CarTransporter(2, Color.black, 4, 5);
+    @Test //Testar att flatbed flyttas rätt
+    public void TestFlatbedMovingWithTransporter() {
+        CarTransporter<Car> newTransporter = new CarTransporter<>(2, Color.black, 4, 5);
         newTransporter.gas(1);
         newTransporter.move();
         assertEquals(10.5, newTransporter.loadable.getY());
     }
 
+
+    @Test // Testar att en plattform inte kan nå över 70 grader
+    public void TestAngleNotExceeding70() {
+        Scania testScania = new Scania(Color.blue, 4, 5);
+        for (int i = 0; i < 10; i++) {
+            testScania.raisePlatform();
+        }
+        assertEquals(70, testScania.attachment.getState());
+
+
+    }
+    @Test // Testar att en plattform inte kan nå under 0 grader
+    public void TestAngleNotLessThan0() {
+        Scania testScania = new Scania(Color.blue, 4, 5);
+        for (int i = 0; i < 10; i++) {
+            testScania.lowerPlatform();
+        }
+        assertEquals(0, testScania.attachment.getState());
+
+
+    }
+    @Test // Testar att lasta en Scania på en CarTransporter
+    public void TestLoadTruck() {
+        CarTransporter <Car> testTruck = new CarTransporter<>(2, Color.black, 4, 5);
+        Scania testScania = new Scania(Color.blue, 4, 5);
+        testTruck.load(testScania);
+        assertEquals(0, testTruck.loadable.nrOfLoadedCars());
+    }
+
+
+    // Testar för CarShop
     @Test
     public void TestVolvoCarShop() {
         Volvo240 testVolvo = new Volvo240(Color.blue, 0, 0);
         Saab95 testSaab = new Saab95(Color.blue, 0, 0);
-        CarShop testShop = new CarShop(2, 0, 0, Volvo240.class);
+        CarShop testShop = new CarShop(2, 0, 0);
         testShop.load(testVolvo);
- //       testShop.load(testSaab);
+        //       testShop.load(testSaab);
         testShop.unload();
         assertEquals(2, testVolvo.getY());
     }
+
 
     @Test
     public void TestAllCarShop() {
         Volvo240 testVolvo = new Volvo240(Color.blue, 0, 0);
         Saab95 testSaab = new Saab95(Color.blue, 0, 0);
-        CarShop testShop = new CarShop(2, 0, 0);
+        CarShop<Car> testShop = new CarShop<>(2, 0, 0);
         testShop.load(testVolvo);
         testShop.load(testSaab);
         testShop.unload();
@@ -232,34 +298,39 @@ public class Testtest {
         assertEquals(2, testVolvo.getY());
     }
     @Test
-    public void TestAngleNotExceeding70() {
-        Scania testScania = new Scania(Color.blue, 4, 5);
-        for (int i = 0; i < 10; i++) {
-            testScania.raisePlatform();
-        }
-        assertEquals(70, testScania.attachment.getState());
+    public void TestRightAmountOfCars(){
+        CarShop<Car> testShop = new CarShop<>(2, 2, 4);
+        Volvo240 volvo240 = new Volvo240(Color.black, 2,5);
+        Saab95 saab95 = new Saab95(Color.blue, 3,4);
+        testShop.load(volvo240);
+        testShop.load(saab95);
+        assertEquals(2, testShop.loadable.nrOfLoadedCars());
+    }
+    @Test
+    public void TestUnloadCarType(){
+        CarShop<Car> testShop = new CarShop<>(2, 2, 4);
+        Volvo240 volvo240 = new Volvo240(Color.black, 2,5);
+        Saab95 saab95 = new Saab95(Color.blue, 3,4);
+        testShop.load(volvo240);
+        testShop.load(saab95);
+        Car car = testShop.unload();
+        System.out.print(car);
+        assertEquals(Saab95.class, car.getClass());
+    }
+
+
+    @Test //Test that we can make a carshop with only
+    public void VolvoCarShop(){
+        CarShop<Volvo240> testShop = new CarShop<>(2, 2, 4);
+        Volvo240 volvo240 = new Volvo240(Color.black, 2,5);
+        Saab95 saab95 = new Saab95(Color.blue, 3,4);
+        testShop.load(volvo240);
+        Volvo240 newVolvo240 = new Volvo240(Color.blue, 3,4);
+        testShop.load(newVolvo240);
+        assertEquals(2, testShop.loadable.nrOfLoadedCars());
+
 
     }
-    @Test
-    public void TestAngleNotLessThan0() {
-        Scania testScania = new Scania(Color.blue, 4, 5);
-        for (int i = 0; i < 10; i++) {
-            testScania.lowerPlatform();
-        }
-        assertEquals(0, testScania.attachment.getState());
 
-    }
-    @Test
-    public void TestLoadTruck() {
-        CarTransporter testTruck = new CarTransporter(2, Color.black, 4, 5);
-        Scania testScania = new Scania(Color.blue, 4, 5);
-        testTruck.load(testScania);
-        assertEquals(0, testTruck.loadable.nrOfLoadedCars());
-    }
-    @Test
-    public void TestFlatbedUp() {
-        CarTransporter testTruck = new CarTransporter(2, Color.black, 4, 5);
-        testTruck.raiseFlatbed();
-        assertEquals(1, testTruck.attachment.getState());
-    }
+
 }

@@ -1,29 +1,33 @@
-public class CarShop{
+public class CarShop <T extends Car>{
 
-    protected Loadable loadable;
-    private Class<?> acceptedCarType;
+
+    protected Loadable <T> loadable;
+    //private Class<T> acceptedCarType;
+
 
     public CarShop(int capacity, double x, double y){
-        this.loadable = new Loadable(capacity, x, y);
-        this.acceptedCarType = Car.class;
+        this.loadable = new Loadable<>(capacity, x, y);
+        //this.acceptedCarType = null;
     }
 
 
-    public CarShop(int capacity, double x, double y, Class<?> acceptedCarType){
-        this.loadable = new Loadable(capacity, x, y);
-        this.acceptedCarType = acceptedCarType;
+
+
+//    public CarShop(int capacity, double x, double y, Class<T> acceptedCarType){
+//        this.loadable = new Loadable<>(capacity, x, y);
+//        this.acceptedCarType = acceptedCarType;
+
+
+
+
+    public void load(T vehicle) {
+        loadable.load(vehicle);
     }
 
-    public void load(Car car) {
-        if (acceptedCarType.isInstance(car)) {
-            loadable.load(car);
-        } else {
-            throw new IllegalArgumentException("Invalid car type");
-        }
-    }
 
-    public Car unload() {
+    public T unload() {
         return loadable.unload();
     }
+
 
 }

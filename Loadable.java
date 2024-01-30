@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Loadable implements Loading {
+
+public class Loadable <T extends Car> implements Loading <T> {
     private final int maxLoad;
-    private final ArrayList<Car> loadedCars;
+    private final ArrayList<T> loadedCars;
     private static final double loadingRadius = 3;
     private double x;
     private double y;
+
 
     public Loadable(int maxLoad, double x, double y){
         this.maxLoad = maxLoad;
@@ -15,21 +17,25 @@ public class Loadable implements Loading {
         this.y = y;
     }
 
+
     public void move(double x, double y){
         this.x = x;
         this.y = y;
     }
 
+
     public double getX(){
         return this.x;
     }
+
 
     public double getY(){
         return this.y;
     }
 
+
     @Override
-    public void load(Car car) {
+    public void load(T car) {
         if (canLoad(car)) {
             loadedCars.add(car);
             car.setX(this.getX());
@@ -37,31 +43,37 @@ public class Loadable implements Loading {
         }
     }
 
+
     @Override
-    public Car unload() {
+    public T unload() {
         if (!loadedCars.isEmpty()) {
-            Car car = loadedCars.removeLast();
+            T car = loadedCars.removeLast();
             car.setX(this.getX() + 2); // Tog nåt godtyckligt
             car.setY(this.getY() + 2);
             return car;
         }
-       return null;
+        return null;
     }
 
-    public List<Car> getLoadedCars() {
+
+    public List<T> getLoadedCars() {
         return new ArrayList<>(loadedCars);
     }
     public int nrOfLoadedCars(){
         return getLoadedCars().size();
     }
 
-    public double distanceBetween(Car car) {
+
+    public double distanceBetween(T car) {
         return Math.sqrt(Math.pow(this.getX() - car.getX(), 2) + Math.pow(this.getY() - car.getY(), 2));
     }
-    private boolean canLoad(Car car) {
+    private boolean canLoad(T car) {
         return loadedCars.size() < maxLoad
                 && !(this.distanceBetween(car) >= loadingRadius);
     }
+
+
+
 
 
 
