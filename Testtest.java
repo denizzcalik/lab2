@@ -271,42 +271,27 @@ public class Testtest {
 
 
     // Testar för CarShop
-    @Test
-    public void TestVolvoCarShop() {
+    @Test // Testar position efter avlastning från en verkstad
+    public void TestCarShopUnloadingPosition() {
         Volvo240 testVolvo = new Volvo240(Color.blue, 0, 0);
-        Saab95 testSaab = new Saab95(Color.blue, 0, 0);
-        CarShop testShop = new CarShop(2, 0, 0);
+        CarShop<Volvo240> testShop = new CarShop<>(2, 0, 0);
         testShop.load(testVolvo);
-        //       testShop.load(testSaab);
         testShop.unload();
         assertEquals(2, testVolvo.getY());
     }
 
-
-    @Test
-    public void TestAllCarShop() {
-        Volvo240 testVolvo = new Volvo240(Color.blue, 0, 0);
-        Saab95 testSaab = new Saab95(Color.blue, 0, 0);
-        CarShop<Car> testShop = new CarShop<>(2, 0, 0);
-        testShop.load(testVolvo);
-        testShop.load(testSaab);
-        testShop.unload();
-        testShop.unload();
-        Car car = testShop.unload();
-        System.out.print(car);
-        testShop.unload();
-        assertEquals(2, testVolvo.getY());
-    }
-    @Test
+    @Test // Testar att en bil inte kan lastas in i en full verkstad
     public void TestRightAmountOfCars(){
         CarShop<Car> testShop = new CarShop<>(2, 2, 4);
         Volvo240 volvo240 = new Volvo240(Color.black, 2,5);
         Saab95 saab95 = new Saab95(Color.blue, 3,4);
+        Scania scania = new Scania(Color.blue, 5,6);
         testShop.load(volvo240);
         testShop.load(saab95);
+        testShop.load(scania);
         assertEquals(2, testShop.loadable.nrOfLoadedCars());
     }
-    @Test
+    @Test // Testar en allmän verkstad
     public void TestUnloadCarType(){
         CarShop<Car> testShop = new CarShop<>(2, 2, 4);
         Volvo240 volvo240 = new Volvo240(Color.black, 2,5);
@@ -314,20 +299,16 @@ public class Testtest {
         testShop.load(volvo240);
         testShop.load(saab95);
         Car car = testShop.unload();
-        System.out.print(car);
         assertEquals(Saab95.class, car.getClass());
     }
-
-
-    @Test //Test that we can make a carshop with only
+    @Test //Testar en Volvo-verkstad - bör inte kunna ta emot Saab
     public void VolvoCarShop(){
         CarShop<Volvo240> testShop = new CarShop<>(2, 2, 4);
         Volvo240 volvo240 = new Volvo240(Color.black, 2,5);
         Saab95 saab95 = new Saab95(Color.blue, 3,4);
         testShop.load(volvo240);
-        Volvo240 newVolvo240 = new Volvo240(Color.blue, 3,4);
-        testShop.load(newVolvo240);
-        assertEquals(2, testShop.loadable.nrOfLoadedCars());
+        // testShop.load(saab95); Om denna avkommenteras, varnas det för fel biltyp
+        assertEquals(1, testShop.loadable.nrOfLoadedCars());
 
 
     }
