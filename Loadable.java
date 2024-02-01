@@ -48,7 +48,7 @@ public class Loadable <T extends Car> implements Loading <T> {
     public T unload() {
         if (!loadedCars.isEmpty()) {
             T car = loadedCars.removeLast();
-            car.setX(this.getX() + 2); // Tog nåt godtyckligt
+            car.setX(this.getX() + 2); 
             car.setY(this.getY() + 2);
             return car;
         }
