@@ -40,7 +40,7 @@ public class CarTransporter <T extends Car> extends Truck{
         if (!attachment.attachmentInUse() && this.getCurrentSpeed() == 0) {
             return loadable.unload();
         }
-        return null;
+        throw new IllegalArgumentException("The flatbed is either in use or the truck is moving");
     }
 
 

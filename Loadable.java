@@ -52,7 +52,7 @@ public class Loadable <T extends Car> implements Loading <T> {
             car.setY(this.getY() + 2);
             return car;
         }
-        return null;
+        throw new IllegalArgumentException("The car shop is empty");
     }
 
 
