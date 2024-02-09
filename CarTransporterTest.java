@@ -42,21 +42,21 @@ public class CarTransporterTest {
     }
     @Test //Testar att det inte går att lasta när flaket används
     public void TestLoadWhenFlatbedUp() {
-        newTransporter.raiseFlatbed();
+        newTransporter.raiseAttachment();
         newTransporter.load(volvo240);
         assertEquals(0, newTransporter.loadable.nrOfLoadedCars());
     }
     @Test //Testar att höja och sänka flatbed
     public void TestFlipFlatbedTwice() {
-        newTransporter.raiseFlatbed();
-        newTransporter.lowerFlatbed();
+        newTransporter.raiseAttachment();
+        newTransporter.lowerAttachment();
         newTransporter.load(volvo240);
         assertEquals(1, newTransporter.loadable.nrOfLoadedCars());
     }
     @Test
     public void TestFlatbedState(){
-        newTransporter.raiseFlatbed();
-        newTransporter.lowerFlatbed();
+        newTransporter.raiseAttachment();
+        newTransporter.lowerAttachment();
         assertEquals(0,newTransporter.attachment.getState());
     }
     @Test //Testar att bilen flyttas med transportören

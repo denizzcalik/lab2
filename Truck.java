@@ -15,6 +15,17 @@ public abstract class Truck extends Car{
   }
         return 0;
     }
+    public void raiseAttachment(){
+        if (getCurrentSpeed() == 0) {
+            this.attachment.raiseAttachment();
+        }
+    }
+    public void lowerAttachment(){
+        if (getCurrentSpeed() == 0) {
+            this.attachment.lowerAttachment();
+        }
+    }
+
 }
 
 
